@@ -1,0 +1,255 @@
+/* ============================================
+   DESIGN SYSTEM — Lucas Suota Portfolio
+   Earthy refined palette + GSAP-driven
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* --- Design Tokens --- */
+:root {
+  /* Colors — New Palette */
+  --bg-base: #FAF9F6;
+  --bg-secondary: #A6957C;
+  --text-primary: #4B4E44;
+  --text-heading: #3A3D34;
+  --text-muted: #9DA1A4;
+  --accent-cta: #C4956A;
+  --accent-cta-light: rgba(196, 149, 106, 0.15);
+  --accent-cta-dark: #B07F55;
+
+  /* Derived accents (analogous warm tones for variety) */
+  --accent-olive: #6B7059;
+  --accent-sand: #A6957C;
+  --accent-warm: #C4956A;
+  --accent-stone: #8A8D82;
+
+  /* Surfaces */
+  --surface-dark: #4B4E44;
+  --surface-dark-elevated: #565A4F;
+  --surface-muted: #F0EDE6;
+  --surface-card: #F5F3EE;
+
+  /* Typography */
+  --font-display: 'Outfit', 'Arial', 'Helvetica', sans-serif;
+  --font-body: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Font sizes — fluid */
+  --fs-hero: clamp(3.5rem, 9vw, 9rem);
+  --fs-section: clamp(2rem, 5vw, 4rem);
+  --fs-subsection: clamp(1.25rem, 3vw, 2rem);
+  --fs-body: 1.125rem;
+  --fs-small: 0.8125rem;
+  --fs-label: 0.75rem;
+
+  /* Spacing — 4px base grid */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 8rem;
+  --space-5xl: 10rem;
+  --space-6xl: 12rem;
+  --space-section: clamp(4rem, 10vh, 8rem);
+
+  /* Borders & Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 100px;
+
+  /* Shadows (warm-tinted) */
+  --shadow-sm: 0 1px 3px rgba(75, 78, 68, 0.06);
+  --shadow-md: 0 4px 16px rgba(75, 78, 68, 0.08);
+  --shadow-lg: 0 8px 32px rgba(75, 78, 68, 0.12);
+  --shadow-glow-cta: 0 0 30px rgba(196, 149, 106, 0.2);
+  --shadow-glow-warm: 0 0 40px rgba(166, 149, 124, 0.15);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 0.15s;
+  --duration-mid: 0.35s;
+  --duration-slow: 0.6s;
+
+  /* Z-index scale */
+  --z-cursor: 9999;
+  --z-nav: 1000;
+  --z-overlay: 500;
+  --z-above: 10;
+  --z-base: 1;
+}
+
+/* --- Base Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: auto;
+  /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+  /* custom cursor takes over on desktop */
+}
+
+/* Show default cursor on touch devices */
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: none;
+  border: none;
+  background: none;
+}
+
+@media (pointer: coarse) {
+  button {
+    cursor: pointer;
+  }
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-heading);
+}
+
+/* --- Utility Classes --- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.section {
+  position: relative;
+  padding: var(--space-section) var(--space-lg);
+}
+
+.section--dark {
+  background-color: var(--surface-dark);
+  color: var(--bg-base);
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--bg-base);
+}
+
+.section--muted {
+  background-color: var(--surface-muted);
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* --- Eyebrow Label --- */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-cta);
+}
+
+.section--dark .eyebrow {
+  color: var(--accent-cta);
+}
+
+/* --- Selection --- */
+::selection {
+  background-color: var(--accent-cta);
+  color: var(--bg-base);
+}
+
+/* --- Scrollbar (subtle) --- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-primary);
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
